@@ -1,0 +1,100 @@
+.terms-page {
+  min-height: calc(100vh - var(--header-height));
+}
+
+.terms-hero {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.terms-hero .section__title {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.terms-effective-date {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.125rem;
+}
+
+.terms-content {
+  background: var(--bg-color);
+  padding: 3rem 0;
+}
+
+.terms-content__wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.terms-section {
+  margin-bottom: 3rem;
+}
+
+.terms-section:last-child {
+  margin-bottom: 0;
+}
+
+.terms-section h2 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.terms-section p {
+  color: var(--text-color);
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.terms-section ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.terms-section li {
+  margin-bottom: 0.75rem;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.terms-contact-email {
+  background: var(--bg-secondary);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+  margin-top: 1rem;
+}
+
+.terms-contact-email strong {
+  color: var(--primary-color);
+}
+
+@media screen and (max-width: 768px) {
+  .terms-hero {
+    padding: 3rem 0;
+  }
+
+  .terms-content {
+    padding: 2rem 0;
+  }
+
+  .terms-section {
+    margin-bottom: 2rem;
+  }
+
+  .terms-section h2 {
+    font-size: 1.25rem;
+  }
+
+  .terms-section p,
+  .terms-section li {
+    font-size: 1rem;
+  }
+}
+

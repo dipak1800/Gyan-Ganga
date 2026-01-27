@@ -1,0 +1,181 @@
+.donate-page {
+  min-height: calc(100vh - var(--header-height));
+}
+
+.donate-hero {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-color) 100%);
+  text-align: center;
+}
+
+.donate-hero__desc {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.donate-content {
+  background: var(--bg-color);
+}
+
+.donate-message {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.donate-qr-section {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.donate-qr-section h2 {
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+.qr-container {
+  background: var(--bg-card);
+  border: 2px solid var(--saffron-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.qr-placeholder {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 2px dashed var(--border-color);
+}
+
+.qr-placeholder p {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.qr-note {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  font-weight: normal;
+}
+
+.qr-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.supported-apps {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.supported-apps h3 {
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.app-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.app-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color);
+}
+
+.app-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.app-item span {
+  display: block;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.transparency-note {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.transparency-note h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.transparency-note p {
+  line-height: 1.8;
+}
+
+.donation-acknowledgment {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.donation-acknowledgment h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.donation-acknowledgment a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.donation-acknowledgment a:hover {
+  color: var(--secondary-color);
+}
+
+@media screen and (max-width: 768px) {
+  .apps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .qr-placeholder {
+    min-height: 300px;
+  }
+}
+

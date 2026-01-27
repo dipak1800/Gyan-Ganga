@@ -1,0 +1,264 @@
+.gyan-ganga-page {
+  min-height: calc(100vh - var(--header-height));
+}
+
+.program-hero {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-color) 100%);
+  text-align: center;
+}
+
+.program-hero__logo {
+  margin-bottom: 2rem;
+}
+
+.program-hero__logo img {
+  max-width: 200px;
+  margin: 0 auto;
+  border-radius: 12px;
+  border: 3px solid var(--saffron-color);
+}
+
+.program-hero__description {
+  font-size: 1.25rem;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.project-overview {
+  background: var(--bg-color);
+}
+
+.project-overview__content {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.problem-statement {
+  background: var(--bg-secondary);
+}
+
+.problem-statement__content {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.facilities {
+  background: var(--bg-color);
+}
+
+.facilities__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.facility-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.facility-card.clickable {
+  cursor: pointer;
+}
+
+.facility-card.clickable:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--saffron-color);
+}
+
+.facility-card.clickable:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.facility-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.facility-icon svg {
+  color: white;
+}
+
+.facility-card h3 {
+  color: var(--text-color);
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.inauguration {
+  background: var(--bg-secondary);
+}
+
+.inauguration__content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.inauguration-card {
+  background: var(--bg-card);
+  border: 2px solid var(--saffron-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.inauguration-card__logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.inauguration-card__logo img {
+  max-width: 120px;
+  border-radius: 8px;
+  border: 2px solid var(--saffron-color);
+}
+
+.inauguration-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.inauguration-card__header h3 {
+  color: var(--saffron-color);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.inauguration-date {
+  background: var(--saffron-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.inauguration-card__details p {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+.inauguration-image {
+  margin-top: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.inauguration-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.inauguration-location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.inauguration-location svg {
+  color: var(--primary-color);
+}
+
+.values {
+  background: var(--bg-color);
+}
+
+.values__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.value-card {
+  background: var(--bg-card);
+  border: 2px solid var(--saffron-color);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  background: linear-gradient(135deg, var(--saffron-color), var(--secondary-color));
+  color: white;
+}
+
+.value-card h3 {
+  color: var(--text-color);
+  margin: 0;
+}
+
+.value-card:hover h3 {
+  color: white;
+}
+
+.program-cta {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  text-align: center;
+}
+
+.program-cta__content h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.program-cta__content p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  font-size: 1.125rem;
+}
+
+.program-cta .btn {
+  background: white;
+  color: var(--primary-color);
+}
+
+.program-cta .btn:hover {
+  background: var(--bg-secondary);
+  transform: translateY(-2px);
+}
+
+@media screen and (max-width: 768px) {
+  .inauguration-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .facilities__grid,
+  .values__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
