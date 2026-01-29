@@ -75,6 +75,17 @@
   color: var(--primary-color);
 }
 
+.terms-contact-email a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color var(--transition);
+}
+
+.terms-contact-email a:hover {
+  color: var(--secondary-color);
+}
+
 @media screen and (max-width: 768px) {
   .terms-hero {
     padding: 3rem 0;

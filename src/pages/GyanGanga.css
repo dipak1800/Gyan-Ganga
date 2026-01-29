@@ -194,17 +194,24 @@
 
 .values__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .value-card {
   background: var(--bg-card);
   border: 2px solid var(--saffron-color);
   border-radius: 12px;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   text-align: center;
   transition: var(--transition);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
 }
 
 .value-card:hover {
@@ -212,11 +219,18 @@
   box-shadow: var(--shadow-hover);
   background: linear-gradient(135deg, var(--saffron-color), var(--secondary-color));
   color: white;
+  border-color: var(--primary-color);
 }
 
 .value-card h3 {
   color: var(--text-color);
   margin: 0;
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .value-card:hover h3 {
@@ -259,6 +273,16 @@
   .facilities__grid,
   .values__grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .value-card {
+    padding: 2rem 1.5rem;
+    min-height: 100px;
+  }
+
+  .value-card h3 {
+    font-size: 1.25rem;
   }
 }
 

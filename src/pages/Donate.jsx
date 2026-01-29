@@ -63,7 +63,7 @@ function Donate() {
             <h3>{t('donate_ack_title')}</h3>
             <p>
               {t('donate_ack_text')}{' '}
-              <a href="mailto:info@ashajyoti.org">info@ashajyoti.org</a>
+              <a href="mailto:contact@ashajyotiruraludaan.org">contact@ashajyotiruraludaan.org</a>
             </p>
           </div>
         </div>

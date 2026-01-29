@@ -5,17 +5,27 @@
 .programs-hero {
   background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-color) 100%);
   text-align: center;
+  padding: 3rem 0 1.5rem !important;
+}
+
+.programs-hero .section__title {
+  margin-bottom: 1rem;
 }
 
 .programs-hero__desc {
   font-size: 1.25rem;
   color: var(--text-light);
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 auto 0;
 }
 
 .programs-list {
   background: var(--bg-color);
+  padding: 1.5rem 0 3rem !important;
+}
+
+.programs-list .programs-grid {
+  margin-top: 0;
 }
 
 .programs-grid {

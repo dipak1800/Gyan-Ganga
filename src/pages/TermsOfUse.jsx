@@ -71,7 +71,8 @@ function TermsOfUse() {
               <h2>{t('terms_section8_title')}</h2>
               <p>{t('terms_section8_p1')}</p>
               <p className="terms-contact-email">
-                <strong>{t('terms_email_label')}:</strong> {t('terms_email')}
+                <strong>{t('terms_email_label')}:</strong>{' '}
+                <a href="mailto:contact@ashajyotiruraludaan.org">{t('terms_email')}</a>
               </p>
             </div>
           </div>

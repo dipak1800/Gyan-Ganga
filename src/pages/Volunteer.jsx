@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useLanguage } from '../i18n/useLanguage.jsx'
 import { API_CONFIG } from '../config/api.js'
+import Alert from '../components/Alert'
 import './Volunteer.css'
 
 function Volunteer() {
   const { t } = useLanguage()
+  const [searchParams] = useSearchParams()
   const [formData, setFormData] = useState({
     fullName: '',
     mobile: '',
@@ -59,20 +62,108 @@ function Volunteer() {
   ]
   const [submitting, setSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [alertMessage, setAlertMessage] = useState('')
+  const [errors, setErrors] = useState({})
+
+  // Validation functions
+  const validateName = (name) => {
+    if (!name.trim()) {
+      return t('validation_name_required') || 'Name is required'
+    }
+    if (name.trim().length < 2) {
+      return t('validation_name_min') || 'Name must be at least 2 characters'
+    }
+    if (!/^[a-zA-Z\s.'-]+$/.test(name.trim())) {
+      return t('validation_name_invalid') || 'Name can only contain letters, spaces, and basic punctuation'
+    }
+    return ''
+  }
+
+  const validateMobile = (mobile) => {
+    if (!mobile.trim()) {
+      return t('validation_mobile_required') || 'Mobile number is required'
+    }
+    if (!/^[0-9]{10}$/.test(mobile.trim())) {
+      return t('validation_mobile_invalid') || 'Mobile number must be exactly 10 digits'
+    }
+    return ''
+  }
+
+  const validateEmail = (email) => {
+    if (!email.trim()) {
+      return t('validation_email_required') || 'Email is required'
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email.trim())) {
+      return t('validation_email_invalid') || 'Please enter a valid email address'
+    }
+    return ''
+  }
+
+  const validateField = (name, value) => {
+    let error = ''
+    switch (name) {
+      case 'fullName':
+        error = validateName(value)
+        break
+      case 'mobile':
+        error = validateMobile(value)
+        break
+      case 'email':
+        error = validateEmail(value)
+        break
+      default:
+        break
+    }
+    setErrors(prev => ({
+      ...prev,
+      [name]: error
+    }))
+    return error === ''
+  }
 
   const supportTypes = [
+    { key: 'support_library', value: 'Modern Library & Study Centre' },
+    { key: 'support_digital', value: 'Digital E-Learning & Computer Facilities' },
+    { key: 'support_skill', value: 'Skill Development & Employment-Oriented Training' },
+    { key: 'support_women', value: 'Women Empowerment & Entrepreneurship' },
+    { key: 'support_career', value: 'Career Counselling & Competitive Exam Guidance' },
+    { key: 'support_farmer', value: 'Farmer Training for Modern & Sustainable Agriculture' },
     { key: 'support_teaching', value: 'Teaching & Education' },
-    { key: 'support_skill', value: 'Skill Development Training' },
     { key: 'support_admin', value: 'Administrative Support' },
     { key: 'support_event', value: 'Event Management' },
-    { key: 'support_digital', value: 'Digital & IT Support' },
     { key: 'support_fundraising', value: 'Fundraising' },
     { key: 'support_outreach', value: 'Community Outreach' },
     { key: 'support_other', value: 'Other' }
   ]
 
+  // Prefill service name from URL parameter
+  useEffect(() => {
+    const serviceName = searchParams.get('service')
+    if (serviceName) {
+      const decodedServiceName = decodeURIComponent(serviceName)
+      // Check if the service matches any support type and pre-select it
+      const matchingSupportType = supportTypes.find(
+        type => type.value === decodedServiceName
+      )
+      
+      setFormData(prev => ({
+        ...prev,
+        supportTypes: matchingSupportType ? [matchingSupportType.value] : prev.supportTypes,
+        message: `I am interested in volunteering for: ${decodedServiceName}`
+      }))
+    }
+  }, [searchParams, supportTypes])
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
+    let processedValue = value
+    
+    // Restrict mobile to 10 digits only
+    if (name === 'mobile') {
+      processedValue = value.replace(/\D/g, '').slice(0, 10)
+    }
+    
     if (type === 'checkbox') {
       if (name === 'supportTypes') {
         setFormData(prev => ({
@@ -90,15 +181,90 @@ function Volunteer() {
     } else {
       setFormData(prev => ({
         ...prev,
-        [name]: value
+        [name]: processedValue
       }))
+      
+      // Real-time validation
+      if (name === 'fullName' || name === 'mobile' || name === 'email') {
+        validateField(name, processedValue)
+      }
     }
+  }
+
+  const validateForm = () => {
+    const newErrors = {}
+    let isValid = true
+
+    const nameError = validateName(formData.fullName)
+    if (nameError) {
+      newErrors.fullName = nameError
+      isValid = false
+    }
+
+    const mobileError = validateMobile(formData.mobile)
+    if (mobileError) {
+      newErrors.mobile = mobileError
+      isValid = false
+    }
+
+    const emailError = validateEmail(formData.email)
+    if (emailError) {
+      newErrors.email = emailError
+      isValid = false
+    }
+
+    if (!formData.state) {
+      newErrors.state = t('validation_state_required') || 'State is required'
+      isValid = false
+    }
+
+    if (!formData.city.trim()) {
+      newErrors.city = t('validation_city_required') || 'City is required'
+      isValid = false
+    }
+
+    if (!formData.occupation.trim()) {
+      newErrors.occupation = t('validation_occupation_required') || 'Occupation is required'
+      isValid = false
+    }
+
+    if (formData.supportTypes.length === 0) {
+      newErrors.supportTypes = t('validation_support_required') || 'Please select at least one support type'
+      isValid = false
+    }
+
+    if (!formData.availability) {
+      newErrors.availability = t('validation_availability_required') || 'Availability is required'
+      isValid = false
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = t('validation_message_required') || 'Message is required'
+      isValid = false
+    }
+
+    if (!formData.consent) {
+      newErrors.consent = t('validation_consent_required') || 'You must agree to the terms'
+      isValid = false
+    }
+
+    setErrors(newErrors)
+    return isValid
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      setSubmitStatus('error')
+      setAlertMessage(t('validation_form_invalid') || 'Please correct the errors in the form')
+      return
+    }
+
     setSubmitting(true)
     setSubmitStatus(null)
+    setAlertMessage('')
 
     try {
       // Prepare data for Google Sheets
@@ -126,6 +292,8 @@ function Volunteer() {
       if (response.ok || response.status === 0) {
         // Status 0 can occur with CORS, which is acceptable for Google Apps Script
         setSubmitStatus('success')
+        setAlertMessage(t('form_success_volunteer'))
+        setErrors({})
         setFormData({
           fullName: '',
           mobile: '',
@@ -140,24 +308,12 @@ function Volunteer() {
         })
       } else {
         setSubmitStatus('error')
+        setAlertMessage(t('form_error'))
       }
     } catch (error) {
       console.error('Form submission error:', error)
-      // Even if there's an error, the data might have been submitted
-      // Google Apps Script sometimes returns CORS errors but still processes the data
-      setSubmitStatus('success')
-      setFormData({
-        fullName: '',
-        mobile: '',
-        email: '',
-        state: '',
-        city: '',
-        occupation: '',
-        supportTypes: [],
-        availability: '',
-        message: '',
-        consent: false
-      })
+      setSubmitStatus('error')
+      setAlertMessage(t('form_error'))
     } finally {
       setSubmitting(false)
     }
@@ -184,8 +340,10 @@ function Volunteer() {
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
+                  className={errors.fullName ? 'error' : ''}
                   required
                 />
+                {errors.fullName && <span className="error-message">{errors.fullName}</span>}
               </div>
 
               <div className="form-group">
@@ -196,9 +354,12 @@ function Volunteer() {
                   name="mobile"
                   value={formData.mobile}
                   onChange={handleChange}
+                  className={errors.mobile ? 'error' : ''}
                   required
-                  pattern="[0-9]{10}"
+                  maxLength="10"
+                  placeholder="10 digits only"
                 />
+                {errors.mobile && <span className="error-message">{errors.mobile}</span>}
               </div>
 
               <div className="form-group">
@@ -209,8 +370,10 @@ function Volunteer() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  className={errors.email ? 'error' : ''}
                   required
                 />
+                {errors.email && <span className="error-message">{errors.email}</span>}
               </div>
 
               <div className="form-group">
@@ -220,6 +383,7 @@ function Volunteer() {
                   name="state"
                   value={formData.state}
                   onChange={handleChange}
+                  className={errors.state ? 'error' : ''}
                   required
                 >
                   <option value="">{t('form_placeholder_state')}</option>
@@ -229,6 +393,7 @@ function Volunteer() {
                     </option>
                   ))}
                 </select>
+                {errors.state && <span className="error-message">{errors.state}</span>}
               </div>
 
               <div className="form-group">
@@ -239,8 +404,10 @@ function Volunteer() {
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
+                  className={errors.city ? 'error' : ''}
                   required
                 />
+                {errors.city && <span className="error-message">{errors.city}</span>}
               </div>
 
               <div className="form-group">
@@ -251,9 +418,11 @@ function Volunteer() {
                   name="occupation"
                   value={formData.occupation}
                   onChange={handleChange}
+                  className={errors.occupation ? 'error' : ''}
                   required
                   placeholder={t('form_placeholder_occupation')}
                 />
+                {errors.occupation && <span className="error-message">{errors.occupation}</span>}
               </div>
 
               <div className="form-group">
@@ -272,6 +441,7 @@ function Volunteer() {
                     </label>
                   ))}
                 </div>
+                {errors.supportTypes && <span className="error-message">{errors.supportTypes}</span>}
               </div>
 
               <div className="form-group">
@@ -281,6 +451,7 @@ function Volunteer() {
                   name="availability"
                   value={formData.availability}
                   onChange={handleChange}
+                  className={errors.availability ? 'error' : ''}
                   required
                 >
                   <option value="">{t('form_placeholder_availability')}</option>
@@ -290,6 +461,7 @@ function Volunteer() {
                   <option value="flexible">{t('form_option_flexible')}</option>
                   <option value="full-time">{t('form_option_fulltime')}</option>
                 </select>
+                {errors.availability && <span className="error-message">{errors.availability}</span>}
               </div>
 
               <div className="form-group">
@@ -299,9 +471,11 @@ function Volunteer() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
+                  className={errors.message ? 'error' : ''}
                   rows="4"
                   required
                 />
+                {errors.message && <span className="error-message">{errors.message}</span>}
               </div>
 
               <div className="form-group checkbox-group">
@@ -315,19 +489,8 @@ function Volunteer() {
                   />
                   <span>{t('form_consent_volunteer')}</span>
                 </label>
+                {errors.consent && <span className="error-message">{errors.consent}</span>}
               </div>
-
-              {submitStatus === 'success' && (
-                <div className="form-message success">
-                  {t('form_success_volunteer')}
-                </div>
-              )}
-
-              {submitStatus === 'error' && (
-                <div className="form-message error">
-                  {t('form_error')}
-                </div>
-              )}
 
               <button
                 type="submit"
@@ -340,9 +503,20 @@ function Volunteer() {
           </div>
         </div>
       </section>
+
+      <Alert
+        type={submitStatus === 'success' ? 'success' : 'error'}
+        message={alertMessage}
+        isOpen={!!(submitStatus && alertMessage)}
+        onClose={() => {
+          setSubmitStatus(null)
+          setAlertMessage('')
+        }}
+      />
     </div>
   )
 }
 
 export default Volunteer
+
 

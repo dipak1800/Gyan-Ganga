@@ -345,6 +345,7 @@
 
 .cta .btn:hover {
   background: var(--bg-secondary);
+  color: var(--primary-color);
   transform: translateY(-2px);
 }
 

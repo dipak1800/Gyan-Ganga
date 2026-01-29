@@ -62,7 +62,7 @@ function PrivacyPolicy() {
             <h2>{t('privacy_contact_title')}</h2>
             <p>
               {t('privacy_contact_text')}{' '}
-              <a href="mailto:info@ashajyoti.org">info@ashajyoti.org</a>
+              <a href="mailto:contact@ashajyotiruraludaan.org">contact@ashajyotiruraludaan.org</a>
             </p>
           </div>
 
