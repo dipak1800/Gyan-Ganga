@@ -60,6 +60,7 @@ function Home() {
               <img 
                 src="/images/foundation-logo.png" 
                 alt="Asha Jyoti Rural Udaan Foundation"
+                fetchPriority="high"
               />
             </div>
             <p className="hero__title">{t('hero_title')}</p>
