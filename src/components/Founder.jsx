@@ -12,11 +12,11 @@ const Founder = () => {
                     <div className="founder__image">
                         <img 
                             src="/images/ravi.jpg" 
-                            alt="Ravi P. Upadhyay - Founder"
+                            alt={`${t('founder_name')} - ${t('founder_title')}`}
                         />
                     </div>
                     <div className="founder__info">
-                        <h3 className="founder__name">Ravi P. Upadhyay</h3>
+                        <h3 className="founder__name">{t('founder_name')}</h3>
                         <p className="founder__designation">
                             {t('founder_designation')}
                         </p>

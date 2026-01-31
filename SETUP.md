@@ -36,7 +36,7 @@ Before deploying, update the form submission endpoints:
 ### Images
 
 All images should be in `public/images/`:
-- ✅ `foundation-logo.jpg` - Already present
+- ✅ `foundation-logo.png` - Foundation logo (transparent background)
 - ✅ `program-logo.jpg` - Already present
 - ✅ `program-infra-model.jpg` - Already present
 - ✅ `ravi.jpg` - Already present

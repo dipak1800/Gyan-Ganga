@@ -16,19 +16,17 @@
 }
 
 .footer__logo {
-  margin-bottom: 1rem;
   display: flex;
   justify-content: flex-start;
 }
 
 .footer__logo img {
-  max-width: 120px;
-  height: auto;
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+  object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
   border-radius: 12px;
-  border: 3px solid var(--saffron-color);
-  padding: 6px;
-  background: var(--bg-card);
 }
 
 .footer__main h3 {
@@ -139,13 +137,11 @@
   .footer__content {
     flex-direction: column;
   }
-  
-  .footer__logo {
-    justify-content: center;
-  }
 
   .footer__logo img {
-    max-width: 100px;
+    width: 160px;
+    height: 160px;
+    max-width: 100%;
   }
 }
 

@@ -328,7 +328,7 @@ function Volunteer() {
         </div>
       </section>
 
-      <section className="volunteer-form-section section">
+      <section className="volunteer-form-section section" data-scroll-reveal>
         <div className="container">
           <div className="form-container">
             <form onSubmit={handleSubmit} className="volunteer-form">
@@ -357,7 +357,6 @@ function Volunteer() {
                   className={errors.mobile ? 'error' : ''}
                   required
                   maxLength="10"
-                  placeholder="10 digits only"
                 />
                 {errors.mobile && <span className="error-message">{errors.mobile}</span>}
               </div>

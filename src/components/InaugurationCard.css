@@ -1,0 +1,257 @@
+/**
+ * Inauguration Invite Card — Aside-only invitation card (scoped to avoid conflicting with Gyan Ganga page).
+ * ~300px width, vertical layout, saffron + deep blue accents, subtle CSS-only animations.
+ * Mobile-friendly and accessible.
+ */
+
+/* Card-specific variables (can override with theme) */
+.inauguration-invite-card {
+  --inaug-saffron: #ff9933;
+  --inaug-saffron-soft: rgba(255, 153, 51, 0.15);
+  --inaug-blue: #1e3a5f;
+  --inaug-blue-soft: rgba(30, 58, 95, 0.12);
+  --inaug-bg: #ffffff;
+  --inaug-text: #2c3e50;
+  --inaug-text-muted: #555;
+  --inaug-border-red: #c41e3a;
+  /* Invitation-style card shadow: soft outer + deeper drop */
+  --inaug-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.12), 0 16px 48px rgba(30, 58, 95, 0.08);
+  --inaug-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.14), 0 24px 56px rgba(30, 58, 95, 0.12);
+  --inaug-radius: 14px;
+  --inaug-border: 1px solid rgba(30, 58, 95, 0.1);
+}
+
+/* Dark theme support */
+body.dark-theme .inauguration-invite-card {
+  --inaug-bg: #363636;
+  --inaug-text: var(--text-color);
+  --inaug-text-muted: var(--text-light);
+  --inaug-blue: #8ec4e8;
+  --inaug-blue-soft: rgba(142, 196, 232, 0.25);
+  --inaug-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.5);
+  --inaug-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.45), 0 12px 32px rgba(0, 0, 0, 0.55);
+  --inaug-border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-theme .inauguration-invite-card__title::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+}
+
+/* Wrapper: provides the 3px "border" area where the rotating gradient is visible */
+.inauguration-invite-card-wrap {
+  --inaug-border-red: #c41e3a;
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 3px;
+  border-radius: 17px;
+  overflow: hidden;
+}
+
+/* Travelling red border: rotating conic gradient (red streak travels around the border) */
+.inauguration-invite-card-wrap::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 17px;
+  background: conic-gradient(
+    transparent 0deg,
+    transparent 250deg,
+    var(--inaug-border-red) 265deg,
+    var(--inaug-border-red) 295deg,
+    transparent 310deg,
+    transparent 360deg
+  );
+  animation: inauguration-border-spin 2.5s linear infinite;
+  z-index: 0;
+}
+
+@keyframes inauguration-border-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Card container: sits on top so only the 3px ring shows the gradient */
+.inauguration-invite-card {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0;
+  padding: 1.25rem 1.25rem 1.5rem;
+  background: var(--inaug-bg);
+  border: var(--inaug-border);
+  border-radius: var(--inaug-radius);
+  box-shadow: var(--inaug-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+  transition: box-shadow 0.3s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.inauguration-invite-card:focus-within,
+.inauguration-invite-card:hover {
+  box-shadow: var(--inaug-shadow-hover);
+}
+
+/* Top badge */
+.inauguration-invite-card__badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--inaug-blue);
+  background: var(--inaug-blue-soft);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+/* Main heading: project name with subtle gradient shimmer (CSS-only) */
+.inauguration-invite-card__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--inaug-blue);
+  margin: 0 0 1rem;
+  line-height: 1.3;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Light gradient sweep on title (subtle, non-distracting) */
+.inauguration-invite-card__title::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: inauguration-shimmer 4s ease-in-out 1s infinite;
+}
+
+@keyframes inauguration-shimmer {
+  0% { left: -100%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { left: 150%; opacity: 0; }
+}
+
+/* Large date: prominent with very subtle glow/pulse */
+.inauguration-invite-card__date {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--inaug-saffron);
+  margin-bottom: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  background: var(--inaug-saffron-soft);
+  animation: inauguration-date-glow 3s ease-in-out infinite;
+}
+
+@keyframes inauguration-date-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--inaug-saffron-soft);
+  }
+  50% {
+    box-shadow: 0 0 12px 2px var(--inaug-saffron-soft);
+  }
+}
+
+/* Subtitle */
+.inauguration-invite-card__subtitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--inaug-text-muted);
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Tagline */
+.inauguration-invite-card__tagline {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--inaug-text);
+  margin: 0 0 1rem;
+  padding: 0 0.25rem;
+}
+
+/* Organizer name */
+.inauguration-invite-card__organizer {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--inaug-blue);
+  margin: 0 0 1.25rem;
+}
+
+/* CTA button */
+.inauguration-invite-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--inaug-blue);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.inauguration-invite-card__cta:hover {
+  background: var(--inaug-saffron);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.inauguration-invite-card__cta:focus {
+  outline: 2px solid var(--inaug-saffron);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .inauguration-invite-card-wrap::before {
+    animation: none;
+  }
+  .inauguration-invite-card__title::after {
+    animation: none;
+  }
+  .inauguration-invite-card__date {
+    animation: none;
+  }
+}
+
+/* Responsive: card fits narrow aside on small screens */
+@media (max-width: 380px) {
+  .inauguration-invite-card {
+    max-width: 100%;
+    padding: 1rem 1rem 1.25rem;
+  }
+  .inauguration-invite-card__date {
+    font-size: 1.25rem;
+  }
+  .inauguration-invite-card__title {
+    font-size: 1.2rem;
+  }
+}

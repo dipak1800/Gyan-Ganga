@@ -16,7 +16,7 @@ const Hero = () => {
                 <div className="hero__content">
                     <div className="hero__logo">
                         <img 
-                            src="/images/foundation-logo.jpg" 
+                            src="/images/foundation-logo.png" 
                             alt="Asha Jyoti Rural Udaan Foundation"
                         />
                     </div>

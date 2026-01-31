@@ -10,6 +10,8 @@ const Vision = () => {
                 <h2 className="section__title">{t('vision_title')}</h2>
                 <div className="vision__content">
                     <p>{t('vision_p1')}</p>
+                    <p>{t('vision_p2')}</p>
+                    <p>{t('vision_p3')}</p>
                 </div>
             </div>
         </section>

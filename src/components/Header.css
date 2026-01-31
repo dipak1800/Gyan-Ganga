@@ -22,21 +22,18 @@
 .nav__logo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-heading);
-  font-size: 1.375rem;
-  font-weight: 600;
-  color: var(--primary-color);
-  letter-spacing: 0.02em;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
 .logo-img {
-  width: 45px;
-  height: 45px;
+  height: 100%;
+  max-height: 88px;
+  width: auto;
+  aspect-ratio: 1;
   object-fit: contain;
-  border-radius: 8px;
-  border: 2px solid var(--saffron-color);
-  padding: 2px;
+  border-radius: 10px;
 }
 
 .nav__menu {
@@ -114,6 +111,7 @@
   margin-top: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .mobile-lang-label {
@@ -228,7 +226,8 @@ body:not(.dark-theme) .moon-icon {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
 }
@@ -236,6 +235,11 @@ body:not(.dark-theme) .moon-icon {
 .aside__header h3 {
   margin: 0;
   color: var(--primary-color);
+  font-size: 1.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .aside__close {
@@ -253,32 +257,44 @@ body:not(.dark-theme) .moon-icon {
 }
 
 .aside__content {
-  padding: 1.5rem;
+  padding: 1.25rem 1.25rem 1.5rem;
   flex: 1 1 auto;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
   min-height: 0;
 }
 
+.aside__inauguration {
+  margin-bottom: 0;
+}
+
 .aside__section {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  margin-top: 1rem;
 }
 
 .aside__section h4 {
   color: var(--primary-color);
-  margin-bottom: 1rem;
-  font-size: 1.125rem;
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .aside__link {
   display: block;
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 0.875rem;
   color: var(--text-color);
   border-radius: 8px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.9375rem;
   transition: var(--transition);
+}
+
+.aside__link:last-child {
+  margin-bottom: 0;
 }
 
 .aside__link:hover {
@@ -338,6 +354,10 @@ body:not(.dark-theme) .moon-icon {
   z-index: 998;
 }
 
+body.dark-theme .overlay {
+  background: rgba(255, 255, 255, 0.04);
+}
+
 /* Mobile Menu */
 @media screen and (max-width: 968px) {
   .nav__menu {
@@ -345,12 +365,18 @@ body:not(.dark-theme) .moon-icon {
     top: 0;
     right: -100%;
     width: 75%;
+    max-width: 320px;
     height: 100vh;
     background-color: var(--bg-color);
     box-shadow: -2px 0 10px rgba(0,0,0,0.1);
     padding: 5rem 2rem 2rem;
     transition: right 0.4s ease;
     z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .nav__menu.show-menu {
@@ -360,22 +386,37 @@ body:not(.dark-theme) .moon-icon {
   .nav__list {
     flex-direction: column;
     gap: 1.5rem;
+    align-items: stretch;
+    flex-shrink: 0;
+  }
+
+  .nav__item {
+    width: 100%;
+  }
+
+  .nav__menu .nav__link {
+    width: 100%;
+    padding: 0.75rem 0;
+    justify-content: flex-start;
+    white-space: normal;
   }
 
   .nav__close {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav__toggle {
     display: flex;
   }
 
-  .language-switcher {
+.language-switcher {
     flex-direction: row;
     justify-content: flex-start;
     gap: 0.75rem;
   }
-  
+
   .mobile-lang-section {
     display: block;
   }
@@ -401,12 +442,8 @@ body:not(.dark-theme) .moon-icon {
 }
 
 @media screen and (max-width: 576px) {
-  .nav__logo {
-    font-size: 1.125rem;
-  }
-
-  .logo-text {
-    display: none;
+  .logo-img {
+    max-height: 68px;
   }
 }
 

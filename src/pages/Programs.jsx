@@ -3,6 +3,9 @@ import { useLanguage } from '../i18n/useLanguage.jsx'
 import { programs } from '../data/programs'
 import './Programs.css'
 
+/* Focus area translation keys (same order as programs.js focusAreas) */
+const FOCUS_AREA_KEYS = ['prog1_title', 'prog2_title', 'prog3_title', 'prog4_title', 'prog5_title', 'prog6_title']
+
 function Programs() {
   const { t } = useLanguage()
 
@@ -15,21 +18,21 @@ function Programs() {
         </div>
       </section>
 
-      <section className="programs-list section">
+      <section className="programs-list section" data-scroll-reveal>
         <div className="container">
           <div className="programs-grid">
             {programs.map(program => (
               <div key={program.id} className="program-card-large">
                 <div className="program-card-large__logo">
-                  <img src="/images/program-logo.jpg" alt={program.name} />
+                  <img src="/images/program-logo.jpg" alt={t('home_flagship_name')} />
                 </div>
-                <h2>{program.name}</h2>
-                <p>{program.description}</p>
+                <h2>{t('home_flagship_name')}</h2>
+                <p>{t('home_flagship_description')}</p>
                 <div className="program-card-large__features">
                   <h4>{t('programs_focus_areas')}</h4>
                   <ul>
-                    {program.focusAreas.map((area, index) => (
-                      <li key={index}>{area}</li>
+                    {FOCUS_AREA_KEYS.map((key, index) => (
+                      <li key={index}>{t(key)}</li>
                     ))}
                   </ul>
                 </div>

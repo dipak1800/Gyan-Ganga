@@ -1,12 +1,45 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../i18n/useLanguage.jsx'
 import { programs } from '../data/programs'
-import VideoCarousel from '../components/VideoCarousel'
+import { getProgramDetail } from '../data/programDetails'
+import ProgramModal from '../components/ProgramModal'
 import './Home.css'
+
+import libraryImg from '../../images/library.png'
+import digitalImg from '../../images/digital.png'
+import upskillImg from '../../images/upskill.png'
+import womenEmpowermentImg from '../../images/women_empowerment.png'
+import careerCounsellingImg from '../../images/carrer_councelling.png'
+import farmerSupportImg from '../../images/farmer_support.png'
+
+const focusAreaImages = {
+  library: libraryImg,
+  digital: digitalImg,
+  textile: upskillImg,
+  women: womenEmpowermentImg,
+  career: careerCounsellingImg,
+  farmer: farmerSupportImg
+}
 
 function Home() {
   const { t } = useLanguage()
   const flagshipProgram = programs[0]
+  const [selectedProgram, setSelectedProgram] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleProgramCardClick = (card) => {
+    const programDetail = getProgramDetail(card.id)
+    if (programDetail) {
+      setSelectedProgram(programDetail)
+      setIsModalOpen(true)
+    }
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedProgram(null)
+  }
 
   const programCards = [
     { id: 'library', titleKey: 'prog1_title', icon: 'library' },
@@ -25,17 +58,14 @@ function Home() {
           <div className="hero__content">
             <div className="hero__logo">
               <img 
-                src="/images/foundation-logo.jpg" 
+                src="/images/foundation-logo.png" 
                 alt="Asha Jyoti Rural Udaan Foundation"
               />
             </div>
-            <h1 className="hero__title">{t('hero_title')}</h1>
-            <div className="hero__subtitle">
-              <p className="hero__org">{t('hero_org')}</p>
-              <p className="hero__flagship">
-                {t('hero_flagship')}
-              </p>
-            </div>
+            <p className="hero__title">{t('hero_title')}</p>
+            <p className="hero__flagship">
+              {t('hero_flagship_label')}<span className="hero__flagship-name">{t('hero_flagship_name')}</span>
+            </p>
             <p className="hero__tagline">{t('hero_tagline')}</p>
             <div className="hero__buttons">
               <a href="#programs" className="btn btn-primary">{t('hero_btn1')}</a>
@@ -45,55 +75,47 @@ function Home() {
         </div>
       </section>
 
+      {/* Flagship Programs Preview */}
+      <section className="flagship-preview section" data-scroll-reveal>
+        <div className="container">
+          <h2 className="section__title">{t('home_flagship_title')}</h2>
+          <div className="flagship-card">
+            <div className="flagship-card__logo">
+              <img src="/images/program-logo.jpg" alt={t('home_flagship_name')} />
+            </div>
+            <h3>{t('home_flagship_name')}</h3>
+            <p>{t('home_flagship_description')}</p>
+            <Link to={`/programs/${flagshipProgram.slug}`} className="btn btn-primary">
+              {t('home_learn_more')}
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Core Focus Areas */}
-      <section className="programs section" id="programs">
+      <section className="programs section" id="programs" data-scroll-reveal>
         <div className="container">
           <h2 className="section__title">{t('programs_title')}</h2>
           <div className="programs__grid">
             {programCards.map((card) => (
-              <div key={card.id} className="program-card">
+              <div
+                key={card.id}
+                className="program-card clickable"
+                onClick={() => handleProgramCardClick(card)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handleProgramCardClick(card)
+                  }
+                }}
+              >
                 <div className="program-icon">
-                  {card.icon === 'library' && (
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                    </svg>
-                  )}
-                  {card.icon === 'digital' && (
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                      <line x1="8" y1="21" x2="16" y2="21"></line>
-                      <line x1="12" y1="17" x2="12" y2="21"></line>
-                    </svg>
-                  )}
-                  {card.icon === 'textile' && (
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                      <path d="M2 17l10 5 10-5"></path>
-                      <path d="M2 12l10 5 10-5"></path>
-                    </svg>
-                  )}
-                  {card.icon === 'women' && (
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="9" cy="7" r="4"></circle>
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                  )}
-                  {card.icon === 'career' && (
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                      <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                    </svg>
-                  )}
-                  {card.icon === 'farmer' && (
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 2v3M12 19v3M5.93 5.93l2.12 2.12M15.95 15.95l2.12 2.12M2 12h3M19 12h3M5.93 18.07l2.12-2.12M15.95 8.05l2.12-2.12"></path>
-                      <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
-                  )}
+                  <img
+                    src={focusAreaImages[card.icon]}
+                    alt=""
+                  />
                 </div>
                 <h3 className="program-title">{t(card.titleKey)}</h3>
               </div>
@@ -102,43 +124,34 @@ function Home() {
         </div>
       </section>
 
-      {/* Flagship Programs Preview */}
-      <section className="flagship-preview section">
-        <div className="container">
-          <h2 className="section__title">{t('home_flagship_title')}</h2>
-          <div className="flagship-card">
-            <div className="flagship-card__logo">
-              <img src="/images/program-logo.jpg" alt={flagshipProgram.name} />
-            </div>
-            <h3>{flagshipProgram.name}</h3>
-            <p>{flagshipProgram.description}</p>
-            <Link to={`/programs/${flagshipProgram.slug}`} className="btn btn-primary">
-              {t('home_learn_more')}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <ProgramModal
+        program={selectedProgram}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
 
       {/* Vision Section */}
-      <section className="vision section">
+      <section className="vision section" data-scroll-reveal>
         <div className="container">
           <h2 className="section__title">{t('vision_title')}</h2>
           <div className="vision__content">
             <p>{t('vision_p1')}</p>
+            <p>{t('vision_p2')}</p>
+            <p>{t('vision_p3')}</p>
           </div>
         </div>
       </section>
 
       {/* Founder Section */}
-      <section className="founder section" id="founder">
+      <section className="founder section" id="founder" data-scroll-reveal>
         <div className="container">
           <h2 className="section__title">{t('founder_title')}</h2>
           <div className="founder__content">
             <div className="founder__image">
-              <img src="/images/ravi.jpg" alt="Ravi P. Upadhyay - Founder" />
+              <img src="/images/ravi.jpg" alt={`${t('founder_name')} - ${t('founder_title')}`} />
             </div>
             <div className="founder__info">
-              <h3 className="founder__name">Ravi P. Upadhyay</h3>
+              <h3 className="founder__name">{t('founder_name')}</h3>
               <p className="founder__designation">{t('founder_designation')}</p>
               <p className="founder__bio">{t('founder_bio')}</p>
               <blockquote className="founder__quote">
@@ -149,11 +162,8 @@ function Home() {
         </div>
       </section>
 
-      {/* Best Wishes Video Carousel */}
-      <VideoCarousel />
-
       {/* Call to Action */}
-      <section className="cta section">
+      <section className="cta section" data-scroll-reveal>
         <div className="container">
           <div className="cta__content">
             <h2>{t('home_cta_title')}</h2>

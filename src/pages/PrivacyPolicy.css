@@ -3,8 +3,18 @@
 }
 
 .privacy-hero {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-color) 100%);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
   text-align: center;
+  padding: 4rem 0;
+}
+
+.privacy-hero .section__title {
+  color: white;
+}
+
+.privacy-hero .section__title::after {
+  background: white;
 }
 
 .privacy-content {
@@ -59,6 +69,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .privacy-hero {
+    padding: 3rem 0;
+  }
+
   .privacy-section {
     padding: 1.5rem;
   }

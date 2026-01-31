@@ -14,6 +14,10 @@
   margin-bottom: 1rem;
 }
 
+.terms-hero .section__title::after {
+  background: white;
+}
+
 .terms-effective-date {
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.125rem;

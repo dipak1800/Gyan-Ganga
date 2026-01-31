@@ -49,6 +49,7 @@ export const translations = {
 
         // Founder Section
         founder_title: "Founder",
+        founder_name: "Ravi P. Upadhyay",
         founder_designation: "Entrepreneur, Social Reformer, and Education & Youth Visionary",
         founder_bio: "Ravi P. Upadhyay is working at the grassroots level to strengthen rural education, skill development, and leadership. He is the Founder of Asha Jyoti Rural Udaan Foundation, inspired by Indian values and the legacy of Chhatrapati Shivaji Maharaj.",
         founder_quote: "\"My vision is to ensure that rural talent is never limited due to lack of education, skills, or guidance.\"",
@@ -63,7 +64,9 @@ export const translations = {
 
         // Vision Section
         vision_title: "Vision for the Future",
-        vision_p1: "To establish a permanent, integrated education and skill-development campus that nurtures leadership, self-reliance, and responsible citizenship among rural communities.",
+        vision_p1: "Our vision is to build a self-reliant, empowered society where rural talent is never limited by lack of education, skills, or guidance.",
+        vision_p2: "Through Asha Jyoti Rural Udaan Foundation and its flagship initiative, Chhatrapati Shivaji Maharaj Gyan-Ganga, we aim to create sustainable learning and empowerment ecosystems across rural India — nurturing confident students, skilled youth, empowered women, and progressive farmers.",
+        vision_p3: "Inspired by the ideals of leadership, courage, and nation-building, our long-term goal is to expand this model into multiple regions, ensuring equal opportunity, dignity, and growth for every aspiring individual.",
 
         // Contact Section
         contact_title: "Contact Information",
@@ -129,6 +132,7 @@ export const translations = {
 
         // Founder Section (Marathi)
         founder_title: "संस्थापक",
+        founder_name: "रवी पी. उपाध्याय",
         founder_designation: "उद्योजक, समाजसुधारक आणि शिक्षण व युवा दूरदर्शी",
         founder_bio: "रवी पी. उपाध्याय ग्रामीण शिक्षण, कौशल्य विकास आणि नेतृत्व मजबूत करण्यासाठी तळागाळात काम करत आहेत. ते आशा ज्योती रूरल उड़ान फाऊंडेशनचे संस्थापक आहेत, भारतीय मूल्ये आणि छत्रपती शिवाजी महाराजांच्या वारशाने प्रेरित.",
         founder_quote: "\"माझी दृष्टी ही आहे की शिक्षण, कौशल्य किंवा मार्गदर्शनाच्या अभावामुळे ग्रामीण प्रतिभा कधीही मर्यादित होणार नाही.\"",
@@ -142,8 +146,10 @@ export const translations = {
         recog2_desc: "राष्ट्रीय आणि प्रादेशिक प्रकाशनांमध्ये वैशिष्ट्यीकृत",
 
         // Vision Section (Marathi)
-        vision_title: "भविष्यासाठी दृष्टी",
-        vision_p1: "ग्रामीण समुदायांमध्ये नेतृत्व, आत्मनिर्भरता आणि जबाबदार नागरिकत्व वाढवणारा एक कायमस्वरूपी, एकात्मिक शिक्षण आणि कौशल्य-विकास कॅम्पस स्थापन करणे.",
+        vision_title: "भविष्याचा दृष्टिकोन",
+        vision_p1: "शिक्षण, कौशल्य किंवा योग्य मार्गदर्शनाच्या अभावामुळे ग्रामीण प्रतिभा कधीही मागे पडू नये — असा स्वावलंबी आणि सशक्त समाज घडवणे हेच आमचे दृष्टीस्वप्न आहे.",
+        vision_p2: "आशा ज्योती रूरल उडान फाउंडेशन आणि त्याचा प्रमुख उपक्रम \"छत्रपती शिवाजी महाराज ज्ञान-गंगा\" यांच्या माध्यमातून, आम्ही ग्रामीण भारतात शाश्वत शिक्षण व सक्षमीकरणाची केंद्रे उभारण्याचा संकल्प केला आहे — जिथे विद्यार्थी आत्मविश्वासाने घडतील, युवक कौशल्यसंपन्न होतील, महिला सक्षम होतील आणि शेतकरी प्रगत बनतील.",
+        vision_p3: "नेतृत्व, धैर्य आणि राष्ट्रनिर्मितीच्या मूल्यांपासून प्रेरणा घेत, हा आदर्श अनेक भागांत विस्तारून प्रत्येक इच्छुक व्यक्तीस समान संधी, स्वाभिमान आणि विकासाचा मार्ग उपलब्ध करून देणे हेच आमचे दीर्घकालीन उद्दिष्ट आहे.",
 
         // Contact Section (Marathi)
         contact_title: "संपर्क माहिती",
@@ -209,6 +215,7 @@ export const translations = {
 
         // Founder Section (Hindi)
         founder_title: "संस्थापक",
+        founder_name: "रवि पी. उपाध्याय",
         founder_designation: "उद्यमी, समाज सुधारक, और शिक्षा व युवा दूरदर्शी",
         founder_bio: "रवि पी. उपाध्याय ग्रामीण शिक्षा, कौशल विकास और नेतृत्व को मजबूत करने के लिए जमीनी स्तर पर काम कर रहे हैं। वे आशा ज्योति रूरल उड़ान फाउंडेशन के संस्थापक हैं, जो भारतीय मूल्यों और छत्रपति शिवाजी महाराज की विरासत से प्रेरित हैं।",
         founder_quote: "\"मेरी दृष्टि यह सुनिश्चित करना है कि शिक्षा, कौशल या मार्गदर्शन की कमी के कारण ग्रामीण प्रतिभा कभी सीमित न हो।\"",
@@ -222,8 +229,10 @@ export const translations = {
         recog2_desc: "राष्ट्रीय और क्षेत्रीय प्रकाशनों में प्रदर्शित",
 
         // Vision Section (Hindi)
-        vision_title: "भविष्य के लिए दृष्टि",
-        vision_p1: "एक स्थायी, एकीकृत शिक्षा और कौशल-विकास परिसर स्थापित करना जो ग्रामीण समुदायों के बीच नेतृत्व, आत्मनिर्भरता और जिम्मेदार नागरिकता को बढ़ावा देता है।",
+        vision_title: "भविष्य की दृष्टि",
+        vision_p1: "हमारा दृष्टिकोण एक ऐसे आत्मनिर्भर और सशक्त समाज का निर्माण करना है, जहाँ ग्रामीण प्रतिभा शिक्षा, कौशल या मार्गदर्शन के अभाव में कभी सीमित न रहे।",
+        vision_p2: "आशा ज्योति रूरल उड़ान फाउंडेशन और इसकी प्रमुख पहल \"छत्रपति शिवाजी महाराज ज्ञान-गंगा\" के माध्यम से, हम ग्रामीण भारत में स्थायी शिक्षा और सशक्तिकरण के केंद्र विकसित करने का लक्ष्य रखते हैं — जहाँ विद्यार्थी आत्मविश्वासी बनें, युवा कुशल हों, महिलाएँ सशक्त हों और किसान प्रगतिशील बनें।",
+        vision_p3: "नेतृत्व, साहस और राष्ट्रनिर्माण के मूल्यों से प्रेरित होकर, हमारा दीर्घकालिक उद्देश्य इस मॉडल को विभिन्न क्षेत्रों तक विस्तार देना है, ताकि प्रत्येक इच्छुक व्यक्ति को समान अवसर, सम्मान और विकास का मार्ग मिल सके।",
 
         // Contact Section (Hindi)
         contact_title: "संपर्क जानकारी",

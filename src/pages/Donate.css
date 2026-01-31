@@ -56,6 +56,27 @@
   border: 2px dashed var(--border-color);
 }
 
+.qr-placeholder--notice {
+  min-height: 160px;
+  padding: 2rem;
+}
+
+.qr-legal-message {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0 0 0.75rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.qr-update-soon {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin: 0;
+  text-align: center;
+}
+
 .qr-placeholder p {
   font-size: 1.25rem;
   font-weight: 600;
@@ -76,7 +97,7 @@
 }
 
 .supported-apps {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto 3rem;
   text-align: center;
 }
@@ -89,16 +110,20 @@
 .apps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
+  max-width: 340px;
+  margin: 0 auto;
 }
 
 .app-item {
-  background: var(--bg-card);
+  position: relative;
+  background: #fff;
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 1.5rem;
-  text-align: center;
+  overflow: hidden;
   transition: var(--transition);
+  aspect-ratio: 1;
+  display: block;
 }
 
 .app-item:hover {
@@ -107,24 +132,14 @@
   border-color: var(--primary-color);
 }
 
-.app-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 1rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-  font-size: 1.125rem;
-}
-
-.app-item span {
+.app-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
   display: block;
-  color: var(--text-color);
-  font-weight: 600;
 }
 
 .transparency-note {
@@ -171,7 +186,7 @@
 
 @media screen and (max-width: 768px) {
   .apps-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .qr-placeholder {

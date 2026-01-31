@@ -1,6 +1,10 @@
 import { useLanguage } from '../i18n/useLanguage.jsx'
 import './Donate.css'
 
+import gpayImg from '../../images/gpay.jpg'
+import phonepeImg from '../../images/phonepe.jpg'
+import paytmImg from '../../images/paytm.jpg'
+
 function Donate() {
   const { t } = useLanguage()
 
@@ -13,7 +17,7 @@ function Donate() {
         </div>
       </section>
 
-      <section className="donate-content section">
+      <section className="donate-content section" data-scroll-reveal>
         <div className="container">
           <div className="donate-message">
             <p>{t('donate_message')}</p>
@@ -22,16 +26,9 @@ function Donate() {
           <div className="donate-qr-section">
             <h2>{t('donate_qr_title')}</h2>
             <div className="qr-container">
-              <div className="qr-placeholder">
-                <p>{t('donate_qr_label')}</p>
-                <p className="qr-note">{t('donate_qr_note')}</p>
-                {/* Replace with actual QR code image */}
-                <img 
-                  src="/images/upi-qr.jpg" 
-                  alt={t('donate_qr_label')} 
-                  className="qr-image"
-                  style={{ display: 'none' }}
-                />
+              <div className="qr-placeholder qr-placeholder--notice">
+                <p className="qr-legal-message">{t('donate_qr_legal_message')}</p>
+                <p className="qr-update-soon">{t('donate_qr_update_soon')}</p>
               </div>
             </div>
           </div>
@@ -40,16 +37,13 @@ function Donate() {
             <h3>{t('donate_apps_title')}</h3>
             <div className="apps-grid">
               <div className="app-item">
-                <div className="app-icon">GPay</div>
-                <span>Google Pay</span>
+                <img src={gpayImg} alt="Google Pay" />
               </div>
               <div className="app-item">
-                <div className="app-icon">PhonePe</div>
-                <span>PhonePe</span>
+                <img src={phonepeImg} alt="PhonePe" />
               </div>
               <div className="app-item">
-                <div className="app-icon">Paytm</div>
-                <span>Paytm</span>
+                <img src={paytmImg} alt="Paytm" />
               </div>
             </div>
           </div>

@@ -19,11 +19,12 @@ export const programs = [
       dignitary: 'Honourable Chhatrapati Rajarshi Shahu Maharaj Saheb of Kolhapur'
     },
     values: [
-      'Leadership',
-      'Courage',
-      'Discipline',
-      'Self-Respect',
-      'National Duty'
+      { titleKey: 'value1_title', descriptionKey: 'value1_desc' },
+      { titleKey: 'value2_title', descriptionKey: 'value2_desc' },
+      { titleKey: 'value3_title', descriptionKey: 'value3_desc' },
+      { titleKey: 'value4_title', descriptionKey: 'value4_desc' },
+      { titleKey: 'value5_title', descriptionKey: 'value5_desc' },
+      { titleKey: 'value6_title', descriptionKey: 'value6_desc' }
     ],
     ctaLabel: "I'm Interested",
     ctaLink: '/apply'

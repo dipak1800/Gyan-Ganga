@@ -6,24 +6,34 @@ import { getProgramDetail } from '../data/programDetails'
 import ProgramModal from '../components/ProgramModal'
 import './GyanGanga.css'
 
+import libraryImg from '../../images/library.png'
+import digitalImg from '../../images/digital.png'
+import upskillImg from '../../images/upskill.png'
+import womenEmpowermentImg from '../../images/women_empowerment.png'
+import careerCounsellingImg from '../../images/carrer_councelling.png'
+import farmerSupportImg from '../../images/farmer_support.png'
+
+const focusAreaImages = {
+  library: libraryImg,
+  digital: digitalImg,
+  textile: upskillImg,
+  women: womenEmpowermentImg,
+  career: careerCounsellingImg,
+  farmer: farmerSupportImg
+}
+
+/* Focus area translation keys and program IDs (same order as programs.js focusAreas) */
+const FOCUS_AREA_KEYS = ['prog1_title', 'prog2_title', 'prog3_title', 'prog4_title', 'prog5_title', 'prog6_title']
+const FOCUS_AREA_IDS = ['library', 'digital', 'textile', 'women', 'career', 'farmer']
+
 function GyanGanga() {
   const { t } = useLanguage()
   const program = getProgramBySlug('gyan-ganga')
   const [selectedProgram, setSelectedProgram] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Map focus areas to program detail IDs
-  const focusAreaMap = {
-    'Modern Library & Study Centre': 'library',
-    'Digital E-Learning & Computer Facilities': 'digital',
-    'Skill Development & Employment-Oriented Training': 'textile',
-    'Women Empowerment & Entrepreneurship': 'women',
-    'Career Counselling & Competitive Exam Guidance': 'career',
-    'Farmer Training for Modern & Sustainable Agriculture': 'farmer'
-  }
-
-  const handleCardClick = (area) => {
-    const programId = focusAreaMap[area]
+  const handleCardClick = (index) => {
+    const programId = FOCUS_AREA_IDS[index]
     if (programId) {
       const programDetail = getProgramDetail(programId)
       if (programDetail) {
@@ -48,46 +58,49 @@ function GyanGanga() {
       <section className="program-hero section">
         <div className="container">
           <div className="program-hero__logo">
-            <img src="/images/program-logo.jpg" alt={program.name} />
+            <img src="/images/program-logo.jpg" alt={t('home_flagship_name')} />
           </div>
-          <h1 className="section__title saffron-underline">{program.name}</h1>
-          <p className="program-hero__description">{program.description}</p>
+          <h1 className="section__title saffron-underline">{t('home_flagship_name')}</h1>
+          <p className="program-hero__description">{t('home_flagship_description')}</p>
         </div>
       </section>
 
       {/* Project Overview */}
-      <section className="project-overview section">
+      <section className="project-overview section" data-scroll-reveal>
         <div className="container">
           <h2 className="section__title">{t('gyan_overview_title')}</h2>
           <div className="project-overview__content">
-            <p>
-              {t('gyan_overview_p1').replace('{name}', program.name)}
-            </p>
-            <p>
-              {t('gyan_overview_p2')}
-            </p>
+            <p>{t('gyan_overview_p1')}</p>
+            <p>{t('gyan_overview_p2')}</p>
+            <p>{t('gyan_overview_p3')}</p>
+            <p>{t('gyan_overview_p4')}</p>
           </div>
         </div>
       </section>
 
       {/* Problem Statement */}
-      <section className="problem-statement section">
+      <section className="problem-statement section" data-scroll-reveal>
         <div className="container">
           <h2 className="section__title">{t('gyan_problem_title')}</h2>
+          {t('gyan_problem_subtitle') && (
+            <p className="problem-statement__subtitle">{t('gyan_problem_subtitle')}</p>
+          )}
           <div className="problem-statement__content">
             <p>{t('gyan_problem_p1')}</p>
             <p>{t('gyan_problem_p2')}</p>
+            <p>{t('gyan_problem_p3')}</p>
+            <p>{t('gyan_problem_p4')}</p>
           </div>
         </div>
       </section>
 
       {/* Planned Facilities */}
-      <section className="facilities section">
+      <section className="facilities section" data-scroll-reveal>
         <div className="container">
           <h2 className="section__title">{t('gyan_facilities_title')}</h2>
           <div className="facilities__grid">
-            {program.focusAreas.map((area, index) => {
-              const programId = focusAreaMap[area]
+            {FOCUS_AREA_KEYS.map((key, index) => {
+              const programId = FOCUS_AREA_IDS[index]
               const programDetail = programId ? getProgramDetail(programId) : null
               const icon = programDetail?.icon || 'library'
               
@@ -95,60 +108,23 @@ function GyanGanga() {
                 <div 
                   key={index} 
                   className="facility-card clickable"
-                  onClick={() => handleCardClick(area)}
+                  onClick={() => handleCardClick(index)}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault()
-                      handleCardClick(area)
+                      handleCardClick(index)
                     }
                   }}
                 >
                   <div className="facility-icon">
-                    {icon === 'library' && (
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                      </svg>
-                    )}
-                    {icon === 'digital' && (
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                        <line x1="12" y1="17" x2="12" y2="21"></line>
-                      </svg>
-                    )}
-                    {icon === 'textile' && (
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                        <path d="M2 17l10 5 10-5"></path>
-                        <path d="M2 12l10 5 10-5"></path>
-                      </svg>
-                    )}
-                    {icon === 'women' && (
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                      </svg>
-                    )}
-                    {icon === 'career' && (
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                      </svg>
-                    )}
-                    {icon === 'farmer' && (
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 2v3M12 19v3M5.93 5.93l2.12 2.12M15.95 15.95l2.12 2.12M2 12h3M19 12h3M5.93 18.07l2.12-2.12M15.95 8.05l2.12-2.12"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                      </svg>
-                    )}
+                    <img
+                      src={focusAreaImages[icon] ?? focusAreaImages.library}
+                      alt=""
+                    />
                   </div>
-                  <h3>{area}</h3>
+                  <h3>{t(key)}</h3>
                 </div>
               )
             })}
@@ -164,31 +140,31 @@ function GyanGanga() {
       />
 
       {/* Bhoomi Pujan & Inauguration */}
-      <section className="inauguration section">
+      <section className="inauguration section" data-scroll-reveal>
         <div className="container">
           <h2 className="section__title">{t('gyan_inauguration_title')}</h2>
           <div className="inauguration__content">
             <div className="inauguration-card">
               <div className="inauguration-card__logo">
-                <img src="/images/program-logo.jpg" alt={program.name} />
+                <img src="/images/program-logo.jpg" alt={t('home_flagship_name')} />
               </div>
               <div className="inauguration-card__header">
-                <h3>{program.inauguration.event}</h3>
-                <span className="inauguration-date">{program.inauguration.date}</span>
+                <h3>{t('gyan_inauguration_event')}</h3>
+                <span className="inauguration-date">{t('gyan_inauguration_date')}</span>
               </div>
               <div className="inauguration-card__details">
                 <p>
                   {t('gyan_inauguration_p1')
-                    .replace('{name}', program.name)
-                    .replace('{date}', program.inauguration.date)
-                    .replace('{location}', program.inauguration.location)}
+                    .replace('{name}', t('home_flagship_name'))
+                    .replace('{date}', t('gyan_inauguration_date'))
+                    .replace('{location}', t('gyan_inauguration_location'))}
                 </p>
                 <p>{t('gyan_inauguration_p2')}</p>
                 <p>
-                  {t('gyan_inauguration_p3').replace('{dignitary}', program.inauguration.dignitary)}
+                  {t('gyan_inauguration_p3').replace('{dignitary}', t('gyan_inauguration_dignitary'))}
                 </p>
                 <div className="inauguration-image">
-                  <img src="/images/program-infra-model.jpg" alt="Gyan-Ganga Campus Infrastructure Model" />
+                  <img src="/images/program-infra-model.jpg" alt={t('gyan_infra_image_alt')} />
                 </div>
               </div>
               <div className="inauguration-location">
@@ -196,21 +172,43 @@ function GyanGanga() {
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                <span>{program.inauguration.location}</span>
+                <span className="inauguration-location__address">{t('gyan_inauguration_venue')}</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Location Map */}
+      <section className="gyan-map section" data-scroll-reveal>
+        <div className="container">
+          <h2 className="section__title">{t('gyan_map_title')}</h2>
+          <div className="gyan-map__wrapper">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.0252709586207!2d82.95469017632549!3d25.63728677743033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991d3e4e1a9c5ff%3A0x37c10c51e1b1dbc9!2z4KSc4KSvIOCkleCkvuCksuClgCDgpLDgpL7gpK4g4KSs4KS-4KSs4KS-IOCkp-CkvuCkrg!5e0!3m2!1sen!2sin!4v1769851930989!5m2!1sen!2sin"
+              width="600"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={t('gyan_map_iframe_title')}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Values */}
-      <section className="values section">
+      <section className="values section" data-scroll-reveal>
         <div className="container">
           <h2 className="section__title">{t('gyan_values_title')}</h2>
           <div className="values__grid">
             {program.values.map((value, index) => (
               <div key={index} className="value-card">
-                <h3>{value}</h3>
+                <h3 className="value-card__title">{t(value.titleKey)}</h3>
+                <div className="value-card__description">
+                  <p>{t(value.descriptionKey)}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -218,14 +216,22 @@ function GyanGanga() {
       </section>
 
       {/* Call to Action */}
-      <section className="program-cta section">
+      <section className="program-cta section" data-scroll-reveal>
         <div className="container">
           <div className="program-cta__content">
             <h2>{t('gyan_cta_title')}</h2>
             <p>{t('gyan_cta_desc')}</p>
-            <Link to="/apply" className="btn btn-primary">
-              {program.ctaLabel}
-            </Link>
+            <div className="program-cta__buttons">
+              <Link to="/apply" className="btn btn-primary">
+                {t('aside_aspirant')}
+              </Link>
+              <Link to="/volunteer" className="btn btn-secondary">
+                {t('aside_volunteer')}
+              </Link>
+              <Link to="/donate" className="btn btn-secondary">
+                {t('aside_donate')}
+              </Link>
+            </div>
           </div>
         </div>
       </section>

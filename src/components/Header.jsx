@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useLanguage } from '../i18n/useLanguage.jsx'
 import { useTheme } from '../hooks/useTheme'
+import InaugurationCard from './InaugurationCard'
 import './Header.css'
 
 function Header() {
@@ -32,14 +33,13 @@ function Header() {
   return (
     <header className="header">
       <nav className="nav container">
-        <div className="nav__logo">
+        <Link to="/" className="nav__logo" aria-label="Asha Jyoti Rural Udaan Foundation - Home">
           <img 
-            src="/images/foundation-logo.jpg" 
+            src="/images/foundation-logo.png" 
             alt="Asha Jyoti Rural Udaan Foundation Logo" 
             className="logo-img"
           />
-          <span className="logo-text">Asha Jyoti</span>
-        </div>
+        </Link>
 
         <div className={`nav__menu ${mobileMenuOpen ? 'show-menu' : ''}`}>
           <ul className="nav__list">
@@ -163,12 +163,11 @@ function Header() {
           <button className="aside__close" onClick={toggleAside}>&times;</button>
         </div>
         <div className="aside__content">
-          <div className="aside__section">
-            <NavLink to="/programs/gyan-ganga" className="aside__link" onClick={closeMenus}>
-              Chhatrapati Shivaji Maharaj Gyan-Ganga
-            </NavLink>
+          {/* Inauguration invitation card */}
+          <div className="aside__inauguration">
+            <InaugurationCard onNavigate={closeMenus} />
           </div>
-          
+
           <div className="aside__section">
             <h4>{t('aside_get_involved')}</h4>
             <NavLink to="/apply" className="aside__link" onClick={closeMenus}>
@@ -180,11 +179,6 @@ function Header() {
             <NavLink to="/donate" className="aside__link" onClick={closeMenus}>
               {t('aside_donate')}
             </NavLink>
-          </div>
-
-          <div className="aside__badge">
-            <span>{t('aside_inauguration')}</span>
-            <small>21st Feb 2026</small>
           </div>
         </div>
       </aside>

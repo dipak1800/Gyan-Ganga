@@ -96,7 +96,7 @@ Update the form submission endpoints in:
 ### Images
 
 Place your images in the `public/images/` directory:
-- `foundation-logo.jpg` - Foundation logo
+- `foundation-logo.png` - Foundation logo (transparent background)
 - `program-logo.jpg` - Gyan Ganga program logo
 - `program-infra-model.jpg` - Infrastructure model image
 - `ravi.jpg` - Founder photo

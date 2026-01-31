@@ -1,5 +1,6 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import ScrollReveal from '../components/ScrollReveal'
 
 function Layout({ children }) {
   return (
@@ -9,6 +10,7 @@ function Layout({ children }) {
         {children}
       </main>
       <Footer />
+      <ScrollReveal />
     </div>
   )
 }

@@ -18,7 +18,7 @@
   --font-heading: 'Libre Baskerville', 'Georgia', 'Times New Roman', serif;
   
   /* Spacing */
-  --header-height: 4rem;
+  --header-height: 5.5rem;
   --section-padding: 5rem 0;
   --container-width: 1200px;
   
@@ -43,6 +43,18 @@ body.dark-theme {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* ===== Scroll reveal (light animation on scroll) ===== */
+[data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+[data-scroll-reveal].in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 html {

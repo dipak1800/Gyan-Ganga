@@ -40,6 +40,28 @@
   background: var(--bg-secondary);
 }
 
+.problem-statement .section__title {
+  text-align: center;
+}
+
+.problem-statement__subtitle {
+  text-align: center;
+  max-width: 900px;
+  margin: 0.5rem auto 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-color);
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 768px) {
+  .problem-statement__subtitle {
+    font-size: 1.1rem;
+    margin: 0.4rem 1rem 1.25rem;
+  }
+}
+
 .problem-statement__content {
   max-width: 900px;
   margin: 0 auto;
@@ -61,7 +83,9 @@
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 2rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   text-align: center;
   transition: var(--transition);
 }
@@ -82,24 +106,36 @@
 }
 
 .facility-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  border-radius: 50%;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  background: var(--bg-secondary);
 }
 
-.facility-icon svg {
-  color: white;
+.facility-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .facility-card h3 {
   color: var(--text-color);
   font-size: 1.125rem;
   margin: 0;
+  padding: 1.5rem 1.5rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .facility-icon {
+    max-width: 400px;
+    margin-inline: auto;
+  }
 }
 
 .inauguration {
@@ -175,17 +211,60 @@
 
 .inauguration-location {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: flex-start;
+  gap: 0.75rem;
   margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  padding: 1rem 1.25rem;
   border-top: 1px solid var(--border-color);
   color: var(--text-color);
   font-weight: 600;
+  background: var(--bg-secondary);
+  border-radius: 8px;
 }
 
 .inauguration-location svg {
   color: var(--primary-color);
+  flex-shrink: 0;
+  margin-top: 0.15em;
+}
+
+.inauguration-location__address {
+  white-space: pre-line;
+  line-height: 1.6;
+  font-size: 0.9375rem;
+}
+
+/* Location map section */
+.gyan-map {
+  background: var(--bg-color);
+}
+
+.gyan-map__wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.gyan-map__wrapper iframe {
+  display: block;
+  width: 100%;
+  min-height: 400px;
+}
+
+.gyan-map__link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.gyan-map__link:hover {
+  text-decoration: underline;
 }
 
 .values {
@@ -194,47 +273,92 @@
 
 .values__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .value-card {
+  position: relative;
+  z-index: 1;
   background: var(--bg-card);
   border: 2px solid var(--saffron-color);
   border-radius: 12px;
-  padding: 2.5rem 2rem;
-  text-align: center;
-  transition: var(--transition);
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 200px;
+  overflow: hidden;
   box-shadow: var(--shadow);
+  transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
 }
 
 .value-card:hover {
-  transform: translateY(-5px);
+  z-index: 10;
   box-shadow: var(--shadow-hover);
-  background: linear-gradient(135deg, var(--saffron-color), var(--secondary-color));
-  color: white;
+  transform: translateY(-3px);
   border-color: var(--primary-color);
 }
 
-.value-card h3 {
-  color: var(--text-color);
+.value-card__title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
-  font-size: 1.375rem;
+  padding: 1.5rem;
+  color: var(--text-color);
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.4;
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
+  z-index: 1;
+  transition: opacity 0.4s ease;
+  text-align: center;
 }
 
-.value-card:hover h3 {
+.value-card:hover .value-card__title {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.value-card__description {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--saffron-color), var(--secondary-color));
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: scale(0.97);
+}
+
+.value-card:hover .value-card__description {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.value-card__description::-webkit-scrollbar {
+  display: none;
+}
+
+.value-card__description p {
+  margin: 0;
   color: white;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
 .program-cta {
@@ -254,13 +378,28 @@
   font-size: 1.125rem;
 }
 
+.program-cta__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
 .program-cta .btn {
   background: white;
   color: var(--primary-color);
 }
 
-.program-cta .btn:hover {
-  background: var(--bg-secondary);
+.program-cta .btn-secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  color: white;
+}
+
+.program-cta .btn:hover,
+.program-cta .btn-secondary:hover {
+  background: white;
+  color: var(--primary-color);
   transform: translateY(-2px);
 }
 
@@ -277,12 +416,17 @@
   }
 
   .value-card {
-    padding: 2rem 1.5rem;
-    min-height: 100px;
+    height: 180px;
   }
 
-  .value-card h3 {
-    font-size: 1.25rem;
+  .value-card__title {
+    padding: 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  .value-card__description p {
+    padding: 0;
+    font-size: 1.05rem;
   }
 }
 

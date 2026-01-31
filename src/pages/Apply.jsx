@@ -282,7 +282,7 @@ function Apply() {
         </div>
       </section>
 
-      <section className="apply-form-section section">
+      <section className="apply-form-section section" data-scroll-reveal>
         <div className="container">
           <div className="form-container">
             <form onSubmit={handleSubmit} className="aspirant-form">
@@ -311,7 +311,6 @@ function Apply() {
                   className={errors.mobile ? 'error' : ''}
                   required
                   maxLength="10"
-                  placeholder="10 digits only"
                 />
                 {errors.mobile && <span className="error-message">{errors.mobile}</span>}
               </div>
