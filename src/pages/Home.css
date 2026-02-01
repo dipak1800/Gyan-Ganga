@@ -1,12 +1,25 @@
 /* ===== Hero Section ===== */
+/* Override global .section padding so hero has no top padding */
+.hero.section {
+  padding: 0 1rem 2rem;
+  padding-top: 0;
+}
+
 .hero {
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-color) 100%);
   position: relative;
-  padding: 32px 0 48px;
+  padding: 0 1rem 2rem;
+  padding-top: 0;
   min-height: auto;
+}
+
+@media (min-width: 769px) {
+  .hero {
+    min-height: calc(100vh - var(--header-height));
+  }
 }
 
 .hero::before {
@@ -31,7 +44,9 @@
 }
 
 .hero__logo {
+  margin-top: 0;
   margin-bottom: 0.5rem;
+  padding-top: 0;
   display: flex;
   justify-content: center;
   width: 100%;

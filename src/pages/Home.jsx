@@ -61,6 +61,8 @@ function Home() {
                 src="/images/foundation-logo.png" 
                 alt="Asha Jyoti Rural Udaan Foundation"
                 fetchPriority="high"
+                loading="eager"
+                decoding="async"
               />
             </div>
             <p className="hero__title">{t('hero_title')}</p>
@@ -82,7 +84,7 @@ function Home() {
           <h2 className="section__title">{t('home_flagship_title')}</h2>
           <div className="flagship-card">
             <div className="flagship-card__logo">
-              <img src="/images/program-logo.jpg" alt={t('home_flagship_name')} />
+              <img src="/images/program-logo.jpg" alt={t('home_flagship_name')} loading="lazy" decoding="async" />
             </div>
             <h3>{t('home_flagship_name')}</h3>
             <p>{t('home_flagship_description')}</p>
@@ -116,6 +118,8 @@ function Home() {
                   <img
                     src={focusAreaImages[card.icon]}
                     alt=""
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <h3 className="program-title">{t(card.titleKey)}</h3>
@@ -149,7 +153,7 @@ function Home() {
           <h2 className="section__title">{t('founder_title')}</h2>
           <div className="founder__content">
             <div className="founder__image">
-              <img src="/images/ravi.jpg" alt={`${t('founder_name')} - ${t('founder_title')}`} />
+              <img src="/images/ravi.jpg" alt={`${t('founder_name')} - ${t('founder_title')}`} loading="lazy" decoding="async" />
             </div>
             <div className="founder__info">
               <h3 className="founder__name">{t('founder_name')}</h3>
