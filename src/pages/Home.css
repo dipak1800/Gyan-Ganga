@@ -67,6 +67,26 @@
   body:not(.dark-theme) .hero__tagline {
     border-bottom-color: var(--border-color);
   }
+
+  /* Mobile light mode: buttons visible on light background */
+  body:not(.dark-theme) .hero__buttons .btn-primary,
+  body:not(.dark-theme) .hero__buttons .btn-secondary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: transparent;
+    text-shadow: none;
+  }
+
+  body:not(.dark-theme) .hero__buttons .btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+  }
+
+  body:not(.dark-theme) .hero__buttons .btn-secondary:hover {
+    background: var(--primary-color);
+    color: #fff;
+  }
 }
 
 @media (min-width: 769px) {
