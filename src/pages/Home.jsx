@@ -4,7 +4,19 @@ import { useLanguage } from '../i18n/useLanguage.jsx'
 import { programs } from '../data/programs'
 import { getProgramDetail } from '../data/programDetails'
 import ProgramModal from '../components/ProgramModal'
+import HeroBackgroundSlideshow from '../components/HeroBackgroundSlideshow'
+import PressCoverageSection from '../components/PressCoverageSection'
+import { pressArticles } from '../data/pressArticles'
 import './Home.css'
+
+/* Hero slideshow: AVIF optional; jpg/png fallback. Paths from public. */
+const HERO_SLIDESHOW_IMAGES = [
+  { jpg: '/images/hero-carousel/digital-elearning.png', alt: 'Digital E-Learning and Computer Facilities' },
+  { jpg: '/images/hero-carousel/skill-development.png', alt: 'Skill Development and Employment Training' },
+  { jpg: '/images/hero-carousel/women-empowerment.png', alt: 'Women Empowerment and Entrepreneurship' },
+  { jpg: '/images/hero-carousel/career-counseling.png', alt: 'Career Counseling and Competitive Exam Guidance' },
+  { jpg: '/images/hero-carousel/farmer-training.png', alt: 'Farmer Training for Modern and Sustainable Agriculture' }
+]
 
 import libraryImg from '../../images/library.png'
 import digitalImg from '../../images/digital.png'
@@ -54,6 +66,11 @@ function Home() {
     <div className="home">
       {/* Hero Section */}
       <section className="hero section" id="home">
+        <HeroBackgroundSlideshow
+          images={HERO_SLIDESHOW_IMAGES}
+          intervalMs={7000}
+          transitionMs={1400}
+        />
         <div className="hero__container container">
           <div className="hero__content">
             <div className="hero__logo">
@@ -166,6 +183,9 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* Press Coverage – full grid, same as program page */}
+      <PressCoverageSection articles={pressArticles} sectionId="press-coverage" />
 
       {/* Call to Action */}
       <section className="cta section" data-scroll-reveal>

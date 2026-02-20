@@ -1,0 +1,319 @@
+/* Press Coverage – grid of article cards, modal viewer */
+
+.press-coverage .container {
+  max-width: 1400px;
+}
+
+.press-coverage__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .press-coverage__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .press-coverage__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+.press-coverage__card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  min-width: 0;
+  padding-inline: 1rem;
+  padding-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.press-coverage__card .press-coverage__thumb-wrap {
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.press-coverage__card:first-child .press-coverage__thumb-wrap {
+  margin-inline: -1rem;
+}
+
+
+@media (min-width: 640px) {
+  .press-coverage__card {
+    min-width: 280px;
+  }
+}
+
+.press-coverage__card:hover {
+  box-shadow: var(--shadow-hover), 0 0 0 2px var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.press-coverage__thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.press-coverage__thumb-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.press-coverage__thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.press-coverage__thumb-btn:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.press-coverage__badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.press-coverage__card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  padding: 1rem 0 0.5rem;
+  line-height: 1.4;
+}
+
+.press-coverage__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  padding: 0;
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+.press-coverage__dot {
+  color: var(--border-color);
+}
+
+.press-coverage__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 0 0;
+  margin-top: auto;
+  margin-bottom: 0;
+  border-top: 1px solid var(--border-color);
+  min-width: 0;
+}
+
+.press-coverage__btn {
+  flex: 1 1 auto;
+  min-width: min-content;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.press-coverage__view-all {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+/* Modal – portaled to body: full-page dark overlay, scrollable (same as invitation) */
+.press-coverage__modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  min-height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+.press-coverage__modal {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: 12px;
+  width: 100%;
+  max-width: min(520px, 90vw);
+  min-height: 420px;
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: pressModalIn 0.25s ease-out;
+}
+
+@keyframes pressModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.press-coverage__modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  color: var(--text-color);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.press-coverage__modal-close:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.press-coverage__modal-close:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.press-coverage__modal-body {
+  flex: 1 1 auto;
+  min-height: 320px;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+  background: var(--bg-secondary);
+  display: block;
+}
+
+.press-coverage__modal-zoom-wrap {
+  transform-origin: 0 0;
+  display: inline-block;
+  max-width: none;
+}
+
+.press-coverage__modal-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  object-fit: contain;
+  object-position: top center;
+  background: var(--bg-secondary);
+}
+
+.press-coverage__modal-zoom-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-card);
+  flex-shrink: 0;
+}
+
+.press-coverage__modal-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 40px;
+  padding: 0 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.press-coverage__modal-zoom-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.press-coverage__modal-zoom-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.press-coverage__modal-zoom-reset {
+  font-size: 0.875rem;
+  min-width: 4rem;
+}
+
+@media (max-width: 380px) {
+  .press-coverage__actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .press-coverage__modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .press-coverage__modal {
+    max-height: calc(100vh - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
+}

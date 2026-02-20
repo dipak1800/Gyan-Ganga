@@ -4,6 +4,9 @@ import { useLanguage } from '../i18n/useLanguage.jsx'
 import { getProgramBySlug } from '../data/programs'
 import { getProgramDetail } from '../data/programDetails'
 import ProgramModal from '../components/ProgramModal'
+import InvitationCardSection from '../components/InvitationCardSection'
+import PressCoverageSection from '../components/PressCoverageSection'
+import { pressArticles } from '../data/pressArticles'
 import './GyanGanga.css'
 
 import libraryImg from '../../images/library.png'
@@ -179,6 +182,14 @@ function GyanGanga() {
         </div>
       </section>
 
+      {/* Inauguration Invitation Card */}
+      <InvitationCardSection
+        imageSrc="/media/invitation/invitation-card.png"
+        imageAlt={t('gyan_invitation_alt')}
+        eventDate={t('gyan_inauguration_date')}
+        location={t('gyan_inauguration_location')}
+      />
+
       {/* Location Map */}
       <section className="gyan-map section" data-scroll-reveal>
         <div className="container">
@@ -214,6 +225,9 @@ function GyanGanga() {
           </div>
         </div>
       </section>
+
+      {/* Press Coverage */}
+      <PressCoverageSection articles={pressArticles} sectionId="press-coverage" />
 
       {/* Call to Action */}
       <section className="program-cta section" data-scroll-reveal>
